@@ -9,20 +9,20 @@ public class AIMovement : Move, IMovement
 
     public void Movement(Vector3 target) //Hareketle ilgili seylerin yapildigi yer.
     {
-        bool onGround = OnGroundControl(_gfx);
+        var onGround = OnGroundControl();
         if (!onGround || damageTook || target.magnitude == 0)
-            _animScript.Move(false);
+            animScr.Move(false);
         else
-            StartMovement(_rb, _animScript, _gfx, target);
+            StartMovement(charRb, animScr, charGfx, target);
     }
 
-    public bool OnGroundControl(GameObject _gameObj)
+    private bool OnGroundControl()
     {
-        bool grounded = Physics.Raycast(_gameObj.transform.position + Vector3.up * .2f, Vector3.down, .43f, 1 << LayerMask.NameToLayer("Ground"));
+        var grounded = Physics.Raycast(charGfx.transform.position + Vector3.up * .2f, Vector3.down, .43f,
+            1 << LayerMask.NameToLayer("Ground"));
 
-        if (!grounded && _gameObj.transform.parent.position.y < -3f)
-            RespawnPoint.RespawnCharacter(_gameObj);
+        if (!grounded && charGfx.transform.parent.position.y < -3f)
+            RespawnPoint.RespawnCharacter(charRb);
         return grounded;
     }
-
 }

@@ -1,57 +1,53 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour
 {
-    private static List<Transform> _playerTransforms;
-    public List<Text> _playerRankTexts;
+    private static List<Transform> _charTransforms;
+    public List<Text> playerRankTexts;
 
-    private void OnEnable()
+
+    private void Start()
     {
-        _playerTransforms = new List<Transform>();
+        Invoke(nameof(ChangeLeaderBoard), 1f);
     }
 
-    private void Update()
+    private void ChangeLeaderBoard()
     {
-        ChangeLeaderBoard();
-    }
-
-    void ChangeLeaderBoard()
-    {
-        List<Transform> _playerRanks = new List<Transform>();
-        for (int i = 0; i < _playerRankTexts.Count; i++)
+        var playerRanks = new List<Transform>();
+        for (var i = 0; i < playerRankTexts.Count; i++)
         {
-            Transform _mostFurtherPlayer = MostFurtherPlayerDifferentFromArray(_playerRanks);
-            _playerRanks.Add(_mostFurtherPlayer);
-            _playerRankTexts[i].text = (i + 1) + " . " + _mostFurtherPlayer.GetComponent<Character>().userName;
+            var mostFurtherPlayer = MostFurtherPlayerDifferentFromArray(playerRanks);
+            playerRanks.Add(mostFurtherPlayer);
+            playerRankTexts[i].text = (i + 1) + " . " + mostFurtherPlayer.GetComponent<Character>().userName;
         }
     }
 
-    Transform MostFurtherPlayerDifferentFromArray(List<Transform> _playerRanks)
+    private Transform MostFurtherPlayerDifferentFromArray(ICollection<Transform> charTransforms)
     {
-        Transform _mostFurtherPlayer = null;
-        float maxDistanceX = float.MinValue;
-        foreach (Transform _playerTransform in _playerTransforms)
+        Transform mostFurtherCharTrans = null;
+        var maxDistanceX = float.MinValue;
+        foreach (var charTrans in LeaderBoard._charTransforms.Where(charTrans =>
+            charTrans.position.x > maxDistanceX && !charTransforms.Contains(charTrans)))
         {
-            if (_playerTransform.position.x > maxDistanceX && !_playerRanks.Contains(_playerTransform))
-            {
-                _mostFurtherPlayer = _playerTransform;
-                maxDistanceX = _playerTransform.position.x;
-            }
+            mostFurtherCharTrans = charTrans;
+            maxDistanceX = charTrans.position.x;
         }
-        return _mostFurtherPlayer;
+
+        return mostFurtherCharTrans;
     }
 
 
-    public static void AddPlayer(Transform _playerTrans)
+    public static void AddPlayer(Transform charTrans)
     {
-        _playerTransforms.Add(_playerTrans);
+        _charTransforms ??= new List<Transform>();
+        _charTransforms.Add(charTrans);
     }
 
-    public static void RemovePlayer(Transform _playerTrans)
+    public static void RemovePlayer(Transform playerTrans)
     {
-        _playerTransforms.Remove(_playerTrans);
+        _charTransforms.Remove(playerTrans);
     }
-
 }

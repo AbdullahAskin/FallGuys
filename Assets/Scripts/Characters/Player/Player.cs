@@ -5,14 +5,14 @@ public class Player : Character, ICanMove, ICanPaint
     private Painting _paintingScript;
     private IDecisionPaint _decisionPaintScript;
 
-    void Start()
+    private void Start()
     {
         _paintingScript = GetComponent<Painting>();
         _decisionPaintScript = GetComponent<IDecisionPaint>();
         Initialize();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!runOver)
             Movement();
@@ -22,7 +22,7 @@ public class Player : Character, ICanMove, ICanPaint
 
     public void Paint()
     {
-        Vector3 target = _decisionPaintScript.PaintDecision();
+        var target = _decisionPaintScript.PaintDecision();
         _paintingScript.Paint(target);
     }
 }

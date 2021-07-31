@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FinishPoint : MonoBehaviour
 {
-    private float cameraPassingOffset = 1.35f;
-    public GameObject _paintMaterialsGameObj;
-    public ParticleSystem _confettiParticle;
+    private const float CameraPassingOffset = 1.35f;
+    public GameObject paintMaterialsGo;
+    public ParticleSystem confettiParticleSys;
 
     private void Start()
     {
-        _confettiParticle = transform.Find("Particles").Find("Confetti").GetComponent<ParticleSystem>();
+        confettiParticleSys = transform.Find("Particles").Find("Confetti").GetComponent<ParticleSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,25 +20,26 @@ public class FinishPoint : MonoBehaviour
             RunOver(other.gameObject);
     }
 
-    IEnumerator PaintStart(GameObject _charGameObj)
+    private IEnumerator PaintStart(GameObject charGo)
     {
-        RunOver(_charGameObj);
-        _confettiParticle.Play();
+        RunOver(charGo);
+        confettiParticleSys.Play();
         yield return new WaitForSeconds(4f);
         GameObject.Find("CameraPosition").GetComponent<CameraMovement>().PaintingOn();
-        _confettiParticle.Stop();
-        _paintMaterialsGameObj.SetActive(true);
-        yield return new WaitForSeconds(cameraPassingOffset);
+        confettiParticleSys.Stop();
+        paintMaterialsGo.SetActive(true);
+        yield return new WaitForSeconds(CameraPassingOffset);
         DisableRaceObjects();
         GameObject.FindGameObjectWithTag("canvas").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.FindGameObjectWithTag("canvas").transform.GetChild(1).gameObject.SetActive(false);
-        _charGameObj.GetComponent<Painting>().Initialize();
+        charGo.GetComponent<Painting>().Initialize();
     }
+    
 
-    private void RunOver(GameObject _charGameObj)
+    private void RunOver(GameObject charGo)
     {
-        _charGameObj.GetComponentInChildren<CharacterAnimation>().Dance(true);
-        _charGameObj.GetComponent<Character>().runOver = true;
+        charGo.GetComponentInChildren<CharacterAnimation>().Dance(true);
+        charGo.GetComponent<Character>().runOver = true;
     }
 
     private void DisableRaceObjects()

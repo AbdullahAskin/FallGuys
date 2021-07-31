@@ -127,9 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   maxVelocity: 0
-  _gfx: {fileID: 0}
-  _rb: {fileID: 0}
-  _animScript: {fileID: 0}
+  charGfx: {fileID: 0}
+  charRb: {fileID: 0}
+  animScr: {fileID: 0}
   damageTook: 0
 --- !u!114 &2723710731514315626
 MonoBehaviour:
@@ -155,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c671c5eeb041b4d408ab75e23abf654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishTarget: {x: 60, y: -1.67, z: 0}
 --- !u!95 &2723710732401433920
 Animator:
   serializedVersion: 3
@@ -194,6 +193,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2723710731514315624}
     m_Modifications:
+    - target: {fileID: 2208719541965123408, guid: f196740a19180be468cb8081db22379c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3649743807132710593, guid: f196740a19180be468cb8081db22379c,
         type: 3}
       propertyPath: m_Pivot.x

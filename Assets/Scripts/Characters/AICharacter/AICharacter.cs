@@ -1,6 +1,6 @@
 ﻿public class AICharacter : Character, ICanMove
 {
-    void Start()
+    private void Start()
     {
         Initialize();
     }

@@ -2,12 +2,12 @@
 
 public class PaintableObjectRotate : MonoBehaviour
 {
-    private Vector3 rotateVector;
+    private Vector3 _rotateVector;
     public float rotateSpeed;
 
-    void Start()
+    private void Start()
     {
-        rotateVector = new Vector3(0, rotateSpeed * Time.deltaTime, 0);
+        _rotateVector = new Vector3(0, rotateSpeed * Time.deltaTime, 0);
     }
 
     void FixedUpdate()
@@ -15,8 +15,8 @@ public class PaintableObjectRotate : MonoBehaviour
         RotateObject();
     }
 
-    public void RotateObject()
+    private void RotateObject()
     {
-        transform.Rotate(rotateVector, Space.Self);
+        transform.Rotate(_rotateVector, Space.Self);
     }
 }

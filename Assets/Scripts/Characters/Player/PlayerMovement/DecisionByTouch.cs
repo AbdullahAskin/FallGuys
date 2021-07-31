@@ -2,11 +2,12 @@
 
 public class DecisionByTouch : MonoBehaviour, IDecisionMove, IDecisionPaint
 {
-    public Camera _paintCamera;
-    private float minMoveDistance = 0.2f;
+    public Camera paintCam;
+    private const float MinMoveDistance = 0.2f;
+
     public Vector3 MovementDecision()
     {
-        Vector3 target = Vector3.zero;
+        var target = Vector3.zero;
         //if (Input.touchCount == 0)
         //    return target;
 
@@ -16,21 +17,17 @@ public class DecisionByTouch : MonoBehaviour, IDecisionMove, IDecisionPaint
         //Vector3 touchPos = Input.GetTouch(0).position;
         Vector3 touchPos = Input.mousePosition;
 
-        if (TouchHit(touchPos, out RaycastHit hit))
-        {
-            if (hit.collider.CompareTag("platform") || hit.collider.CompareTag("rotatingPlatform"))
-            {
-                target = hit.point;
-                if (!Move.DistanceBiggerThanValue(target, transform.position, minMoveDistance))
-                    target = Vector3.zero;
-            }
-        }
+        if (!TouchHit(touchPos, out RaycastHit hit)) return target;
+        if (!hit.collider.CompareTag("platform") && !hit.collider.CompareTag("rotatingPlatform")) return target;
+        target = hit.point;
+        if (!Move.DistanceBiggerThanValue(target, transform.position, MinMoveDistance))
+            target = Vector3.zero;
         return target;
     }
 
     public Vector3 PaintDecision()
     {
-        Vector3 target = Vector3.zero;
+        var target = Vector3.zero;
         //if (Input.touchCount == 0)
         //    return target;        
         if (!Input.GetMouseButton(0))
@@ -38,20 +35,16 @@ public class DecisionByTouch : MonoBehaviour, IDecisionMove, IDecisionPaint
 
         //Vector2 touchPos = Input.GetTouch(0).position;
         Vector2 touchPos = Input.mousePosition;
-        if (TouchHit(touchPos, out RaycastHit hit))
-        {
-            if (hit.transform.CompareTag("paintableObject"))
-            {
-                Vector2 pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
-                target = new Vector2(pixelUV.x - _paintCamera.orthographicSize, pixelUV.y - _paintCamera.orthographicSize);
-            }
-        }
+        if (!TouchHit(touchPos, out RaycastHit hit)) return target;
+        if (!hit.transform.CompareTag("paintableObject")) return target;
+        var pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
+        target = new Vector2(pixelUV.x - paintCam.orthographicSize, pixelUV.y - paintCam.orthographicSize);
         return target;
     }
 
-    private bool TouchHit(Vector3 touchPos, out RaycastHit hit)
+    private static bool TouchHit(Vector3 touchPos, out RaycastHit hit)
     {
-        Ray touchRay = Camera.main.ScreenPointToRay(touchPos);
+        var touchRay = Camera.main.ScreenPointToRay(touchPos);
         return Physics.Raycast(touchRay, out hit);
     }
 }

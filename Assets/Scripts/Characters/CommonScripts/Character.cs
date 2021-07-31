@@ -1,10 +1,11 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Character : MonoBehaviour, IDamageable
 {
-    protected IMovement _movementScript;
+    private IMovement _movementScr;
     private IDecisionMove _decisionMoveScript;
     private GameObject _damageParticle;
 
@@ -12,9 +13,9 @@ public class Character : MonoBehaviour, IDamageable
 
     [HideInInspector] public bool runOver = false;
 
-    public void Initialize()
+    protected void Initialize()
     {
-        _movementScript = GetComponent<IMovement>();
+        _movementScr = GetComponent<IMovement>();
         _decisionMoveScript = GetComponent<IDecisionMove>();
         _damageParticle = Resources.Load<GameObject>("Prefabs/Particles/Damage");
         SetName(userName);
@@ -24,24 +25,24 @@ public class Character : MonoBehaviour, IDamageable
 
     public void Movement()
     {
-        Vector3 target = _decisionMoveScript.MovementDecision();
-        _movementScript.Movement(target);
+        var target = _decisionMoveScript.MovementDecision();
+        _movementScr.Movement(target);
     }
 
     public IEnumerator DamageTaking(Vector3 hitPosition)
     {
-        Move _moveScript = GetComponent<Move>();
-        _moveScript.damageTook = true;
-        GameObject _damagePartGameObj = Instantiate(_damageParticle);
-        _damagePartGameObj.transform.position = hitPosition;
-        Destroy(_damagePartGameObj, _damagePartGameObj.GetComponent<ParticleSystem>().main.duration);
+        var moveScr = GetComponent<Move>();
+        moveScr.damageTook = true;
+        var damagePartGameObj = Instantiate(_damageParticle);
+        damagePartGameObj.transform.position = hitPosition;
+        Destroy(damagePartGameObj, damagePartGameObj.GetComponent<ParticleSystem>().main.duration);
         yield return new WaitForSeconds(.5f);
-        _moveScript.damageTook = false;
+        moveScr.damageTook = false;
     }
 
     private void SetName(string userName)
     {
-        Text _userNameText = transform.Find("VerticalCanvas").GetChild(0).GetComponentInChildren<Text>();
-        _userNameText.text = userName;
+        var userNameText = transform.Find("VerticalCanvas").GetChild(0).GetComponentInChildren<Text>();
+        userNameText.text = userName;
     }
 }
