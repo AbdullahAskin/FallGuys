@@ -1,53 +1,64 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour
 {
-    private static List<Transform> _charTransforms;
-    public List<Text> playerRankTexts;
+    private static List<Character> _charactersScr;
+    [SerializeField] private List<Text> leaderBoardTexts;
 
 
-    private void Start()
+    private void Awake()
     {
-        Invoke(nameof(ChangeLeaderBoard), 1f);
+        _charactersScr = new List<Character>();
+        InvokeRepeating(nameof(ChangeLeaderBoard), 1f, 1f);
     }
 
     private void ChangeLeaderBoard()
     {
-        var playerRanks = new List<Transform>();
-        for (var i = 0; i < playerRankTexts.Count; i++)
+        var charRanksScr = new List<Character>();
+        for (var i = 0; i < _charactersScr.Count; i++)
         {
-            var mostFurtherPlayer = MostFurtherPlayerDifferentFromArray(playerRanks);
-            playerRanks.Add(mostFurtherPlayer);
-            playerRankTexts[i].text = (i + 1) + " . " + mostFurtherPlayer.GetComponent<Character>().userName;
+            var mostFurtherCharScr = MostFurtherCharDifferentFromArray(charRanksScr);
+            charRanksScr.Add(mostFurtherCharScr);
         }
+
+        SetLeaderBoardTexts(charRanksScr);
     }
 
-    private Transform MostFurtherPlayerDifferentFromArray(ICollection<Transform> charTransforms)
+    private Character MostFurtherCharDifferentFromArray(ICollection<Character> charRanksScr)
     {
-        Transform mostFurtherCharTrans = null;
+        Character mostFurtherCharScr = null;
         var maxDistanceX = float.MinValue;
-        foreach (var charTrans in LeaderBoard._charTransforms.Where(charTrans =>
-            charTrans.position.x > maxDistanceX && !charTransforms.Contains(charTrans)))
+        foreach (var charScr in LeaderBoard._charactersScr.Where(charScr =>
+            charScr.transform.position.x > maxDistanceX && !charRanksScr.Contains(charScr)))
         {
-            mostFurtherCharTrans = charTrans;
-            maxDistanceX = charTrans.position.x;
+            mostFurtherCharScr = charScr;
+            maxDistanceX = charScr.transform.position.x;
         }
 
-        return mostFurtherCharTrans;
+        return mostFurtherCharScr;
+    }
+
+    private void SetLeaderBoardTexts(List<Character> charRanksScr)
+    {
+        for (var index = 0; index < leaderBoardTexts.Count; index++)
+        {
+            leaderBoardTexts[index].text = charRanksScr[index].userName;
+        }
     }
 
 
-    public static void AddPlayer(Transform charTrans)
+    public static void AddChar(Character charScr)
     {
-        _charTransforms ??= new List<Transform>();
-        _charTransforms.Add(charTrans);
+        _charactersScr ??= new List<Character>();
+        _charactersScr.Add(charScr);
     }
 
-    public static void RemovePlayer(Transform playerTrans)
+    public static void RemoveChar(Character charScr)
     {
-        _charTransforms.Remove(playerTrans);
+        _charactersScr.Remove(charScr);
     }
 }

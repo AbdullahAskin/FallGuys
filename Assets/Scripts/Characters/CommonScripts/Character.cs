@@ -6,38 +6,40 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour, IDamageable
 {
     private IMovement _movementScr;
+    private Move _commonMoveScr;
     private IDecisionMove _decisionMoveScript;
-    private GameObject _damageParticle;
-
+    private ParticleSystem _damageParticleSys;
+    public Text characterText;
     public string userName = "defaultName";
+
 
     [HideInInspector] public bool runOver = false;
 
     protected void Initialize()
     {
         _movementScr = GetComponent<IMovement>();
+        _commonMoveScr = GetComponent<Move>();
         _decisionMoveScript = GetComponent<IDecisionMove>();
-        _damageParticle = Resources.Load<GameObject>("Prefabs/Particles/Damage");
+        _damageParticleSys = Resources.Load<ParticleSystem>("Prefabs/Particles/Damage");
         SetName(userName);
-        LeaderBoard.AddPlayer(transform);
+        LeaderBoard.AddChar(this);
     }
 
+
+    public IEnumerator DamageTaking(Vector3 hitPosition)
+    {
+        _commonMoveScr.damageTook = true;
+        var clonedDamageParticleSys = Instantiate(_damageParticleSys);
+        clonedDamageParticleSys.transform.position = hitPosition;
+        Destroy(clonedDamageParticleSys, clonedDamageParticleSys.main.duration);
+        yield return new WaitForSeconds(.5f);
+        _commonMoveScr.damageTook = false;
+    }
 
     public void Movement()
     {
         var target = _decisionMoveScript.MovementDecision();
         _movementScr.Movement(target);
-    }
-
-    public IEnumerator DamageTaking(Vector3 hitPosition)
-    {
-        var moveScr = GetComponent<Move>();
-        moveScr.damageTook = true;
-        var damagePartGameObj = Instantiate(_damageParticle);
-        damagePartGameObj.transform.position = hitPosition;
-        Destroy(damagePartGameObj, damagePartGameObj.GetComponent<ParticleSystem>().main.duration);
-        yield return new WaitForSeconds(.5f);
-        moveScr.damageTook = false;
     }
 
     private void SetName(string userName)

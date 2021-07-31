@@ -31,7 +31,7 @@ public class DecisionByAlgorithm : MonoBehaviour, AIDecisionMove, IDecisionMove
             _iPath++;
 
         var currentTarget = _movementDecisionOnPlatformScr.MovementDecision(_path.corners[_iPath]);
-        return _path.corners[_iPath];
+        return currentTarget;
     }
 
 

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class HalfDonutMovement : HorizontalMovement
 {
-    private readonly float minMoveTime = 1f, maxMoveTime = 4f;
+    private const float MINMoveTime = 1f;
+    private const float MAXMoveTime = 4f;
 
     private void Start()
     {
@@ -11,19 +12,19 @@ public class HalfDonutMovement : HorizontalMovement
         StartCoroutine(StartMovement());
     }
 
-    public IEnumerator StartMovement() // Daha sonra kisalt.
+    private IEnumerator StartMovement() 
     {
-        while (Move.DistanceBiggerThanValue(_backwardTarget.position, transform.position, 0.001f))
+        while (Move.DistanceBiggerThanValue(backwardTargetTrans.position, transform.position, 0.001f))
         {
-            Movement(_backwardTarget, speed / 6);
+            Movement(backwardTargetTrans, Speed / 6);
             yield return new WaitForFixedUpdate();
         }
 
-        yield return new WaitForSeconds(Random.Range(minMoveTime, maxMoveTime));
+        yield return new WaitForSeconds(Random.Range(MINMoveTime, MAXMoveTime));
 
-        while (Move.DistanceBiggerThanValue(_forwardTarget.position, transform.position, 0.001f))
+        while (Move.DistanceBiggerThanValue(forwardTargetTrans.position, transform.position, 0.001f))
         {
-            Movement(_forwardTarget, speed);
+            Movement(forwardTargetTrans, Speed);
             yield return new WaitForFixedUpdate();
         }
 

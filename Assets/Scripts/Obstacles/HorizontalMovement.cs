@@ -2,24 +2,24 @@
 
 public class HorizontalMovement : MonoBehaviour
 {
-    protected Rigidbody _rb;
-    public Transform _forwardTarget, _backwardTarget;
-    protected float speed;
+    protected Rigidbody obstacleRb;
+    public Transform forwardTargetTrans, backwardTargetTrans;
+    protected float Speed;
 
-    protected void Initialize(float speed)
+    protected void Initialize(float Speed)
     {
-        _rb = GetComponent<Rigidbody>();
-        this.speed = speed;
+        obstacleRb = GetComponent<Rigidbody>();
+        this.Speed = Speed;
     }
 
-    public void Movement(Transform _target, float speed)
+    protected void Movement(Transform target, float speed)
     {
-        _rb.MovePosition(Vector3.MoveTowards(transform.position, _target.position, speed * Time.fixedDeltaTime));
+        obstacleRb.MovePosition(Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime));
     }
 
     protected void OnCollisionEnter(Collision collision)
     {
-        IDamageable _damageableScript = collision.transform.GetComponent<IDamageable>();
-        StartCoroutine(_damageableScript.DamageTaking(collision.contacts[0].point));
+        var damageableScript = collision.transform.GetComponent<IDamageable>();
+        StartCoroutine(damageableScript.DamageTaking(collision.contacts[0].point));
     }
 }

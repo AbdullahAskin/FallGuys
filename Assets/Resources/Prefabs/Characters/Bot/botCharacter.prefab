@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e914dd5026c6143bf897cccd1ec572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterText: {fileID: 4803087765196849697}
   userName: Bot-3
   runOver: 0
 --- !u!114 &2723710731514315629
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c671c5eeb041b4d408ab75e23abf654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finishTargetTrans: {fileID: 0}
 --- !u!95 &2723710732401433920
 Animator:
   serializedVersion: 3
@@ -316,6 +318,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2353207943022208826}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4803087765196849697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7066069715187279131, guid: f196740a19180be468cb8081db22379c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2353207943022208826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2723710732401433927
 PrefabInstance:
   m_ObjectHideFlags: 0

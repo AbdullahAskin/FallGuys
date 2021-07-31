@@ -1,29 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Painting : TexturePainting
 {
-    private TextureControl _texContScript;
+    private TextureControl _textureControlScr;
     public GameObject brushCursor, brushContainer;
-    private ColorPicker _colorPicker;
+    public ColorPicker _colorPicker;
+
+    private void Start()
+    {
+        _textureControlScr = GetComponent<TextureControl>();
+        brushSpriteRen = Resources.Load<SpriteRenderer>("Paint/Brush/SolidBrushStroke");
+        _textureControlScr = GameObject.FindGameObjectWithTag("paintableObject").GetComponent<TextureControl>();
+    }
 
     public void Initialize()
     {
-        _texContScript = GetComponent<TextureControl>();
-        _colorPicker = GameObject.Find("ColorPercentages").GetComponentInParent<ColorPicker>();
-        brushSpriteRen = Resources.Load<SpriteRenderer>("Paint/Brush/SolidBrushStroke");
-        _texContScript = GameObject.FindGameObjectWithTag("paintableObject").GetComponent<TextureControl>();
-        StartCoroutine(_texContScript.SaveTexture(brushCursor, brushContainer, _colorPicker));
+        StartCoroutine(_textureControlScr.SaveTexture(brushCursor, brushContainer, _colorPicker));
     }
 
     public void Paint(Vector3 target)
     {
-        if (target.magnitude == 0 || _texContScript.saving)
+        if (target.magnitude == 0 || _textureControlScr.saving)
         {
             brushCursor.SetActive(false);
             return;
         }
 
-        PaintTexture(target, brushCursor, brushContainer, _colorPicker._brushSizeSlider.value,
-            _colorPicker._brushColor);
+        PaintTexture(target, brushCursor, brushContainer, _colorPicker.brushSizeSlider.value,
+            _colorPicker.brushColor);
     }
 }

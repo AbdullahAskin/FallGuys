@@ -2,11 +2,11 @@
 
 public class RotatingPlatform : Rotate
 {
-    private float applyingForce;
+    private float _force;
     private void Start()
     {
         Initialize(40, Vector3.forward); //Dondugu yonun tersine kuvvet uyguladigi icin bu sekilde
-        applyingForce = -1000 * rotateSign;
+        _force = -1000 * rotateSign;
     }
 
     void FixedUpdate()
@@ -15,13 +15,13 @@ public class RotatingPlatform : Rotate
     }
     private void OnCollisionStay(Collision collision)
     {
-        Rigidbody _objectRigidbody = collision.transform.GetComponent<Rigidbody>();
-        _objectRigidbody.AddForce(Vector3.back * applyingForce * Time.deltaTime);
+        var objectRigidbody = collision.transform.GetComponent<Rigidbody>();
+        objectRigidbody.AddForce(Vector3.back * _force * Time.deltaTime);
     }
 
     public Vector3 TargetToDirection(Vector3 forceLocation, Vector3 target)
     {
-        Vector3 targetDirection = (target - forceLocation).normalized;
+        var targetDirection = (target - forceLocation).normalized;
         return targetDirection;
     }
 }

@@ -10,7 +10,7 @@ public class PaintableObjectRotate : MonoBehaviour
         _rotateVector = new Vector3(0, rotateSpeed * Time.deltaTime, 0);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         RotateObject();
     }

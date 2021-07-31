@@ -9,16 +9,16 @@ public class Rotator : Rotate
         _backPredict = transform.GetChild(0).gameObject;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         RotateObject();
         PredictObstacleControl();
     }
 
 
-    void PredictObstacleControl()
+    private void PredictObstacleControl()
     {
-        float currentYAngle = transform.eulerAngles.y;
+        var currentYAngle = transform.eulerAngles.y;
         if (currentYAngle > 270)
             _backPredict.SetActive(false);
         else if (currentYAngle > 90)
@@ -27,7 +27,7 @@ public class Rotator : Rotate
 
     private void OnCollisionEnter(Collision collision)
     {
-        IDamageable _damageableScript = collision.transform.GetComponent<IDamageable>();
-        StartCoroutine(_damageableScript.DamageTaking(collision.contacts[0].point));
+        var damageableScript = collision.transform.GetComponent<IDamageable>();
+        StartCoroutine(damageableScript.DamageTaking(collision.contacts[0].point));
     }
 }

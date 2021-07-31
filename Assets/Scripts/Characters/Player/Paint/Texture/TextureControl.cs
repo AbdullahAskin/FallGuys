@@ -14,24 +14,25 @@ public class TextureControl : MonoBehaviour
         _baseMaterial = Resources.Load<Material>("Paint/PaintableObject/BaseMaterial");
     }
 
-    public IEnumerator SaveTexture(GameObject _brushCursor, GameObject _brushContainer, IChangeableText _changeableText)
+    public IEnumerator SaveTexture(GameObject brushCursor, GameObject brushContainer, IChangeableText changeableText)
     {
         saving = true;
-        PaintPointerOff(_brushCursor);
+        PaintPointerOff(brushCursor);
         yield return new WaitForSeconds(.2f);
-        Save(_brushContainer);
-        TextureColorRates(_changeableText);
+        Save(brushContainer);
+        TextureColorRates(changeableText);
         saving = false;
         yield return new WaitForSeconds(4f);
-        StartCoroutine(SaveTexture(_brushCursor, _brushContainer, _changeableText));
+        StartCoroutine(SaveTexture(brushCursor, brushContainer, changeableText));
     }
 
-    private void Save(GameObject _brushContainer)
+    private void Save(GameObject brushContainer)
     {
         _baseMaterial.mainTexture = RtToTex2DConverter();
-        foreach (Transform child in _brushContainer.transform)
+        foreach (Transform child in brushContainer.transform)
             Destroy(child.gameObject);
     }
+
     private Texture2D RtToTex2DConverter()
     {
         RenderTexture.active = _canvasTexture;
@@ -42,41 +43,42 @@ public class TextureControl : MonoBehaviour
         return texture2D;
     }
 
-    private void TextureColorRates(IChangeableText _changeableText)
+    private void TextureColorRates(IChangeableText changeableTextScr)
     {
         Color[] pixels = RtToTex2DConverter().GetPixels();
         float redCounter = 0, greenCounter = 0, blueCounter = 0;
-        ColorCalculater(pixels, ref redCounter, ref greenCounter, ref blueCounter);
-        _changeableText.ChangeTexts(redCounter, greenCounter, blueCounter);
+        CalculateColorPercentages(pixels, ref redCounter, ref greenCounter, ref blueCounter);
+        changeableTextScr.ChangeTexts(redCounter, greenCounter, blueCounter);
     }
 
-    void ColorCalculater(Color[] pixels, ref float redCounter, ref float greenCounter, ref float blueCounter)
+    private static void CalculateColorPercentages(Color[] pixelColors, ref float redCounter, ref float greenCounter,
+        ref float blueCounter)
     {
-        foreach (Color _color in pixels)
+        foreach (var pixelColor in pixelColors)
         {
-            if (_color.a < .5)
+            if (pixelColor.a < .5)
                 continue;
-            if (_color.r > 0 || _color.g > 0 || _color.b > 0)
-                if (_color.r > _color.g)
-                {
-                    if (_color.r > _color.b)
-                        redCounter += _color.r * _color.a;
-                    else
-                        blueCounter += _color.b * _color.a;
-                }
-                else if (_color.g > _color.b)
-                    greenCounter += _color.g * _color.a;
-                else if (_color.b > _color.g)
-                    blueCounter += _color.b * _color.a;
+            if (!(pixelColor.r > 0) && !(pixelColor.g > 0) && !(pixelColor.b > 0)) continue;
+            if (pixelColor.r > pixelColor.g)
+            {
+                if (pixelColor.r > pixelColor.b)
+                    redCounter += pixelColor.r * pixelColor.a;
+                else
+                    blueCounter += pixelColor.b * pixelColor.a;
+            }
+            else if (pixelColor.g > pixelColor.b)
+                greenCounter += pixelColor.g * pixelColor.a;
+            else if (pixelColor.b > pixelColor.g)
+                blueCounter += pixelColor.b * pixelColor.a;
         }
-        redCounter = Convert.ToSingle(Math.Round(redCounter * 100 / pixels.Length, 1));
-        greenCounter = Convert.ToSingle(Math.Round(greenCounter * 100 / pixels.Length, 1));
-        blueCounter = Convert.ToSingle(Math.Round(blueCounter * 100 / pixels.Length, 1));
+
+        redCounter = Convert.ToSingle(Math.Round(redCounter * 100 / pixelColors.Length, 1));
+        greenCounter = Convert.ToSingle(Math.Round(greenCounter * 100 / pixelColors.Length, 1));
+        blueCounter = Convert.ToSingle(Math.Round(blueCounter * 100 / pixelColors.Length, 1));
     }
 
-    private void PaintPointerOff(GameObject _brushCursor)
+    private static void PaintPointerOff(GameObject _brushCursor)
     {
         _brushCursor.SetActive(false);
     }
-
 }

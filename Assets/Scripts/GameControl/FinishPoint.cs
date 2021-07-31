@@ -4,12 +4,30 @@ using UnityEngine;
 public class FinishPoint : MonoBehaviour
 {
     private const float CameraPassingOffset = 1.35f;
+
     public GameObject paintMaterialsGo;
     public ParticleSystem confettiParticleSys;
+    private Painting _paintingScr;
+    private CameraMovement _cameraMovementScr;
+    private CharacterAnimation _charAnimScr;
+    private Character _charScr;
+
+    private GameObject _rainParticleGo;
+    private GameObject _botsParentGo;
+    private Transform _canvasTrans;
 
     private void Start()
     {
+        var mainCharTrans = GameObject.Find("mainCharacter").transform;
+        _paintingScr = mainCharTrans.GetComponent<Painting>();
+        _charAnimScr = mainCharTrans.GetComponentInChildren<CharacterAnimation>();
+        _charScr = mainCharTrans.GetComponent<Character>();
         confettiParticleSys = transform.Find("Particles").Find("Confetti").GetComponent<ParticleSystem>();
+        _cameraMovementScr = GameObject.Find("CameraPosition").GetComponent<CameraMovement>();
+
+        _rainParticleGo = GameObject.Find("RainParticle");
+        _botsParentGo = GameObject.Find("Bots");
+        _canvasTrans = GameObject.FindGameObjectWithTag("canvas").transform;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,34 +35,34 @@ public class FinishPoint : MonoBehaviour
         if (other.CompareTag("mainCharacter"))
             StartCoroutine(PaintStart(other.gameObject));
         else if (other.CompareTag("bot"))
-            RunOver(other.gameObject);
+            SetCharPropToRunOver(other.gameObject);
     }
 
     private IEnumerator PaintStart(GameObject charGo)
     {
-        RunOver(charGo);
+        SetCharPropToRunOver(charGo);
         confettiParticleSys.Play();
         yield return new WaitForSeconds(4f);
-        GameObject.Find("CameraPosition").GetComponent<CameraMovement>().PaintingOn();
+        _cameraMovementScr.PaintingOn();
         confettiParticleSys.Stop();
         paintMaterialsGo.SetActive(true);
         yield return new WaitForSeconds(CameraPassingOffset);
         DisableRaceObjects();
-        GameObject.FindGameObjectWithTag("canvas").transform.GetChild(0).gameObject.SetActive(true);
-        GameObject.FindGameObjectWithTag("canvas").transform.GetChild(1).gameObject.SetActive(false);
-        charGo.GetComponent<Painting>().Initialize();
+        _canvasTrans.GetChild(0).gameObject.SetActive(true);
+        _canvasTrans.GetChild(1).gameObject.SetActive(false);
+        _paintingScr.Initialize();
     }
-    
 
-    private void RunOver(GameObject charGo)
+
+    private void SetCharPropToRunOver(GameObject charGo)
     {
-        charGo.GetComponentInChildren<CharacterAnimation>().Dance(true);
-        charGo.GetComponent<Character>().runOver = true;
+        _charAnimScr.Dance(true);
+        _charScr.runOver = true;
     }
 
     private void DisableRaceObjects()
     {
-        GameObject.Find("Bots").SetActive(false);
-        GameObject.Find("RainParticle").SetActive(false);
+        _botsParentGo.SetActive(false);
+        _rainParticleGo.SetActive(false);
     }
 }

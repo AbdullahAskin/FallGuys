@@ -2,21 +2,21 @@
 
 public class Rotate : MonoBehaviour
 {
-    private Rigidbody _rb;
+    private Rigidbody _obstacleRb;
     public float rotateSign;//Ters tarafa donebilme olanagi tanir.
-    [HideInInspector] protected Vector3 rotateVector;
+    [HideInInspector] private Vector3 _rotateVector;
 
 
-    public void Initialize(float rotateSpeed, Vector3 rotateDirection)
+    protected void Initialize(float rotateSpeed, Vector3 rotateDirection)
     {
-        rotateVector = rotateDirection * rotateSpeed * rotateSign;
-        _rb = GetComponent<Rigidbody>();
+        _rotateVector = rotateDirection * rotateSpeed * rotateSign;
+        _obstacleRb = GetComponent<Rigidbody>();
     }
 
-    public void RotateObject()
+    protected void RotateObject()
     {
-        Quaternion deltaRotation = Quaternion.Euler(rotateVector * Time.fixedDeltaTime);
-        _rb.MoveRotation(_rb.rotation * deltaRotation);
+        Quaternion deltaRotation = Quaternion.Euler(_rotateVector * Time.fixedDeltaTime);
+        _obstacleRb.MoveRotation(_obstacleRb.rotation * deltaRotation);
     }
 
 }

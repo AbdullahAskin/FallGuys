@@ -27,24 +27,24 @@ public class PlayerMovement : Move, IMovement
         else if (!animScr.GetJump()) // Yerde dokunma var ve ziplama yok
         {
             StartMovement(charRb, animScr, charGfx, target);
-            _jumpAmount = JumpCalculater(ref _elapsedTime, target);
+            _jumpAmount = GetJumpAmount(ref _elapsedTime, target);
         }
     }
 
     private void EndMovement()
     {
         animScr.Move(false);
-        JumpReset(ref _jumpAmount, ref _elapsedTime);
+        ResetJump(ref _jumpAmount, ref _elapsedTime);
     }
 
-    private void JumpReset(ref float jumpAmount, ref float elapsedTime)
+    private void ResetJump(ref float jumpAmount, ref float elapsedTime)
     {
         jumpAmount = 0;
         elapsedTime = 0;
         ResetJumpBar();
     }
 
-    private float JumpCalculater(ref float elapsedTime, Vector3 target)
+    private float GetJumpAmount(ref float elapsedTime, Vector3 target)
     {
         var jumpAmount = Mathf.Lerp(0, 1, elapsedTime / 2);
         elapsedTime += Time.deltaTime;

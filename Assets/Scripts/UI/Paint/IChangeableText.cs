@@ -1,4 +1,4 @@
 ﻿public interface IChangeableText
 {
-    void ChangeTexts(float r, float b, float g);
+    void ChangeTexts(float red, float blue, float green);
 }

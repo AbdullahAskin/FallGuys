@@ -331,6 +331,18 @@ Transform:
   m_Father: {fileID: 362941546}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &66647616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9197659227182313763, guid: 648461864e3bcf04f9915fb73e2e963a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2982563722647821639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &98076918
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,8 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 147125008}
-  _backwardTarget: {fileID: 1716045222}
+  forwardTargetTrans: {fileID: 147125008}
+  backwardTargetTrans: {fileID: 1716045222}
 --- !u!64 &98076922
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -607,12 +619,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0652dfe563b05f43ac3e796e7a74d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _r: {fileID: 1444874435}
-  _g: {fileID: 893688136}
-  _b: {fileID: 1987412685}
-  _brushColor: {r: 0, g: 0, b: 0, a: 0}
-  _selectedColorBg: {fileID: 965314397}
-  _brushSizeSlider: {fileID: 1458502086}
+  redText: {fileID: 1444874435}
+  greenText: {fileID: 893688136}
+  blueText: {fileID: 1987412685}
+  brushColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColorBg: {fileID: 965314397}
+  brushSizeSlider: {fileID: 1458502086}
 --- !u!114 &129537014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,12 +1018,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c4feaf24e794b2f4cb12ca8e15878fab,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 52
+      value: 20.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4feaf24e794b2f4cb12ca8e15878fab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c4feaf24e794b2f4cb12ca8e15878fab,
         type: 3}
@@ -1449,8 +1461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 1152853459}
-  _backwardTarget: {fileID: 1825628730}
+  forwardTargetTrans: {fileID: 1152853459}
+  backwardTargetTrans: {fileID: 1825628730}
 --- !u!64 &327830111
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1772,7 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687cb7a978d09624cb75cf267d2ded18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRankTexts: []
+  leaderBoardTexts: []
 --- !u!1 &468604456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,7 +2882,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3279,8 +3291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b437efa4ef53a4990ef197be44ff54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 242056308}
-  _backwardTarget: {fileID: 498118879}
+  forwardTargetTrans: {fileID: 242056308}
+  backwardTargetTrans: {fileID: 498118879}
 --- !u!1 &754883361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3773,8 +3785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 991651364}
-  _backwardTarget: {fileID: 1743189875}
+  forwardTargetTrans: {fileID: 991651364}
+  backwardTargetTrans: {fileID: 1743189875}
 --- !u!64 &813296186
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4224,8 +4236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 1529818222}
-  _backwardTarget: {fileID: 1678927291}
+  forwardTargetTrans: {fileID: 1529818222}
+  backwardTargetTrans: {fileID: 1678927291}
 --- !u!1 &910150520
 GameObject:
   m_ObjectHideFlags: 0
@@ -10928,8 +10940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 798481559}
-  _backwardTarget: {fileID: 569696447}
+  forwardTargetTrans: {fileID: 798481559}
+  backwardTargetTrans: {fileID: 569696447}
 --- !u!64 &1362991855
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12974,8 +12986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545138d3f8fe9fa44b5e2763773422e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardTarget: {fileID: 1560894829}
-  _backwardTarget: {fileID: 2043271935}
+  forwardTargetTrans: {fileID: 1560894829}
+  backwardTargetTrans: {fileID: 2043271935}
 --- !u!64 &1760355891
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14698,6 +14710,11 @@ PrefabInstance:
       propertyPath: _jumpStarting
       value: 
       objectReference: {fileID: 1794562333}
+    - target: {fileID: 2982563721462098274, guid: 648461864e3bcf04f9915fb73e2e963a,
+        type: 3}
+      propertyPath: characterText
+      value: 
+      objectReference: {fileID: 66647616}
     - target: {fileID: 2982563721462098276, guid: 648461864e3bcf04f9915fb73e2e963a,
         type: 3}
       propertyPath: m_RootOrder
@@ -14768,6 +14785,11 @@ PrefabInstance:
       propertyPath: _brushCursor
       value: 
       objectReference: {fileID: 5778044162132163895}
+    - target: {fileID: 2982563721462098282, guid: 648461864e3bcf04f9915fb73e2e963a,
+        type: 3}
+      propertyPath: _colorPicker
+      value: 
+      objectReference: {fileID: 129537013}
     - target: {fileID: 2982563721462098282, guid: 648461864e3bcf04f9915fb73e2e963a,
         type: 3}
       propertyPath: brushContainer

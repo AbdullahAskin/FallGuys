@@ -3,51 +3,48 @@ using UnityEngine.UI;
 
 public class ColorPicker : MonoBehaviour, IChangeableText
 {
-    [SerializeField]
-    private Text _r, _g, _b;
-    [HideInInspector]
-    public Color _brushColor;
-    [SerializeField]
-    private GameObject _selectedColorBg;
-    public Slider _brushSizeSlider;
+    [SerializeField] private Text redText, greenText, blueText;
+    [HideInInspector] public Color brushColor;
+    [SerializeField] private GameObject selectedColorBg;
+    public Slider brushSizeSlider;
 
 
     private void Start()
     {
-        _brushColor = Color.red;
-        _brushColor.a = 1f;
+        brushColor = Color.red;
+        brushColor.a = 1f;
     }
 
-    public void ChangeTexts(float r, float b, float g)
+    public void ChangeTexts(float red, float blue, float green)
     {
-        _r.text = "%" + r;
-        _b.text = "%" + g;
-        _g.text = "%" + b;
+        this.redText.text = "%" + red;
+        this.blueText.text = "%" + green;
+        this.greenText.text = "%" + blue;
     }
 
     public void RedColor()
     {
-        _brushColor = Color.red;
-        _brushColor.a = .7f;
+        brushColor = Color.red;
+        brushColor.a = .7f;
         SelectedColorIcon(0);
     }
+
     public void GreenColor()
     {
-        _brushColor = Color.green;
-        _brushColor.a = 0.7f;
+        brushColor = Color.green;
+        brushColor.a = 0.7f;
         SelectedColorIcon(1);
     }
+
     public void BlueColor()
     {
-        _brushColor = Color.blue;
-        _brushColor.a = 0.7f;
+        brushColor = Color.blue;
+        brushColor.a = 0.7f;
         SelectedColorIcon(2);
     }
 
     private void SelectedColorIcon(int whichChild)
     {
-        _selectedColorBg.transform.SetParent(transform.GetChild(1).GetChild(whichChild).transform, false);
+        selectedColorBg.transform.SetParent(transform.GetChild(1).GetChild(whichChild).transform, false);
     }
-
-
 }
