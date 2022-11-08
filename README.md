@@ -1,7 +1,6 @@
-# Panteon Games Prototype of Game
+# Fall Guys
 
-The prototype of the game which result of 14 days coding .
-
+Fun race game that i made result of 14 days coding.
 
 <img src="Images/1.png" width="280" height="500">      <img src="Images/2.png" width="280" height="500">
 
