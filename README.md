@@ -22,7 +22,7 @@ Fall Guys is a fun and exciting race game where players navigate through challen
 To run Fall Guys, follow these steps:
 
 1. Clone or download the repository to your local machine
-2. Open the project in your preferred game engine
+2. Open the project on Unity
 3. Click the "Run" button to start the game
 
 <!-- BUILT WITH -->
