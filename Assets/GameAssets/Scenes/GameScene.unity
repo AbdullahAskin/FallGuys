@@ -9251,7 +9251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.12522833, y: 0.6959295, z: -0.1252283, w: 0.6959295}
-  m_LocalPosition: {x: -12.975103, y: 3.2121093, z: 0.0000009119511}
+  m_LocalPosition: {x: -13.185103, y: 3.2121093, z: 0.0000009119511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13204,6 +13204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a139a24ccdbd8cf4cb4abbcec5ba6328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasTexture: {fileID: 8400000, guid: 1dd5c06a4ccfb6e4c8067820f3f0e29b, type: 2}
+  _baseMaterial: {fileID: 2100000, guid: ec89aa768cb8bfb45a2bc01dbde2190e, type: 2}
   saving: 0
 --- !u!198 &1794562333 stripped
 ParticleSystem:
@@ -13346,7 +13348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866617773}
   m_LocalRotation: {x: 0.08162223, y: 0.7023802, z: -0.08162225, w: 0.7023801}
-  m_LocalPosition: {x: -12.975103, y: 3.2121093, z: 0.0000009119511}
+  m_LocalPosition: {x: -13.185103, y: 3.2121093, z: 0.0000009119511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14623,7 +14625,7 @@ PrefabInstance:
     - target: {fileID: 2982563721462098276, guid: 648461864e3bcf04f9915fb73e2e963a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.31
+      value: -9.52
       objectReference: {fileID: 0}
     - target: {fileID: 2982563721462098276, guid: 648461864e3bcf04f9915fb73e2e963a,
         type: 3}
@@ -14695,6 +14697,12 @@ PrefabInstance:
       propertyPath: brushContainer
       value: 
       objectReference: {fileID: 1536307863}
+    - target: {fileID: 2982563721462098282, guid: 648461864e3bcf04f9915fb73e2e963a,
+        type: 3}
+      propertyPath: brushSpriteRen
+      value: 
+      objectReference: {fileID: 21275448, guid: f937790da07248e48849a7a1c110214e,
+        type: 3}
     - target: {fileID: 2982563721462098282, guid: 648461864e3bcf04f9915fb73e2e963a,
         type: 3}
       propertyPath: _brushContainer

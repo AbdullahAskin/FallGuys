@@ -10,7 +10,6 @@ public class Painting : TexturePainting
     private void Start()
     {
         _textureControlScr = GetComponent<TextureControl>();
-        brushSpriteRen = Resources.Load<SpriteRenderer>("Paint/Brush/SolidBrushStroke");
         _textureControlScr = GameObject.FindGameObjectWithTag("paintableObject").GetComponent<TextureControl>();
     }
 

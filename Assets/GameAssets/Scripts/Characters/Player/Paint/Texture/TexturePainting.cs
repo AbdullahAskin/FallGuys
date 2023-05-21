@@ -2,7 +2,7 @@
 
 public class TexturePainting : MonoBehaviour
 {
-    [HideInInspector] public SpriteRenderer brushSpriteRen;
+    public SpriteRenderer brushSpriteRen;
 
     protected void PaintTexture(Vector3 target, GameObject brushCursorGo, GameObject brushContainerGo, float brushSize,
         Color brushColor) // Brush color ,size buraya disaridan gonderilicek.

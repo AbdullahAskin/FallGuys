@@ -8,18 +8,12 @@ public class TextureControl : MonoBehaviour
     public Material _baseMaterial;
     [HideInInspector] public bool saving = false;
 
-    private void Start()
-    {
-        _canvasTexture = Resources.Load<RenderTexture>("Paint/PaintableObject/CanvasTexture");
-        _baseMaterial = Resources.Load<Material>("Paint/PaintableObject/BaseMaterial");
-    }
-
     public IEnumerator SaveTexture(GameObject brushCursor, GameObject brushContainer, IChangeableText changeableText)
     {
         saving = true;
         PaintPointerOff(brushCursor);
         yield return new WaitForSeconds(.2f);
-        Save(brushContainer);
+        // Save(brushContainer);
         TextureColorRates(changeableText);
         saving = false;
         yield return new WaitForSeconds(4f);
