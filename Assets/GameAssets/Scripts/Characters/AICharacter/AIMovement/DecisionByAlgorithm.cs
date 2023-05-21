@@ -24,11 +24,9 @@ public class DecisionByAlgorithm : MonoBehaviour, AIDecisionMove, IDecisionMove
 
     public Vector3 FindTarget()
     {
-        if (_path.corners.Length == 0 || _iPath >= _path.corners.Length)
-            return Vector3.zero;
+        if (_path.corners.Length == 0 || _iPath + 2 >= _path.corners.Length) return Vector3.zero;
 
-        if (!Move.DistanceBiggerThanValue(transform.position, _path.corners[_iPath], .3f))
-            _iPath++;
+        if (!Move.DistanceBiggerThanValue(transform.position, _path.corners[_iPath], .3f)) _iPath++;
 
         var currentTarget = _movementDecisionOnPlatformScr.MovementDecision(_path.corners[_iPath]);
         return currentTarget;

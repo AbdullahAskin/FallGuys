@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4971392675865467031}
   m_Father: {fileID: 2723710731514315624}
@@ -63,6 +64,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2469706558067030700}
   - {fileID: 1301039532663427579}
@@ -111,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e914dd5026c6143bf897cccd1ec572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageParticleSys: {fileID: 8634327471017601904, guid: 91fdb01a144ddfb4194237871e4c886d,
+    type: 3}
   characterText: {fileID: 4803087765196849697}
   userName: Bot-3
   runOver: 0
@@ -157,37 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishTargetTrans: {fileID: 0}
---- !u!95 &2723710732401433920
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2958295043485065238}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6581d764c1c392b45b84f6f493d947fb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2723710732401433923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2958295043485065238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e11af898aec2984cae8a9246d0d21fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2353207943022208826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -704,18 +677,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4142992a02d7c7946b63356277d63e66, type: 3}
---- !u!1 &2958295043485065238 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4142992a02d7c7946b63356277d63e66,
-    type: 3}
-  m_PrefabInstance: {fileID: 2723710732401433927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2469706558067030700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4142992a02d7c7946b63356277d63e66,
     type: 3}
   m_PrefabInstance: {fileID: 2723710732401433927}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2958295043485065238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4142992a02d7c7946b63356277d63e66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2723710732401433927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2723710732401433920
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958295043485065238}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6581d764c1c392b45b84f6f493d947fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2723710732401433923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2958295043485065238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e11af898aec2984cae8a9246d0d21fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4966656183290983731
 PrefabInstance:
   m_ObjectHideFlags: 0

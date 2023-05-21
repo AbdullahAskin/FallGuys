@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TextureControl : MonoBehaviour
 {
-    private RenderTexture _canvasTexture;
-    private Material _baseMaterial;
+    public RenderTexture _canvasTexture;
+    public Material _baseMaterial;
     [HideInInspector] public bool saving = false;
 
     private void Start()

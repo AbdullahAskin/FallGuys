@@ -54,10 +54,15 @@ public class Jumper : MonoBehaviour
         var grounded = Physics.Raycast(charRb.transform.position + Vector3.up * .2f, Vector3.down, .43f,
             1 << LayerMask.NameToLayer("Ground"));
         if (!grounded)
+        {
             grounded = Physics.Raycast(charRb.transform.position + Vector3.up * .2f, Vector3.down, .43f,
                 1 << LayerMask.NameToLayer("Ignore Raycast"));
-        if (!grounded && charRb.transform.parent.position.y < -3f)
+        }
+
+        if (!grounded && charRb.transform.position.y < -3f)
+        {
             RespawnPoint.RespawnCharacter(charRb);
+        }
         return grounded;
     }
 

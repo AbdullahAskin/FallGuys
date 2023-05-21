@@ -18,12 +18,10 @@ public class FinishPoint : MonoBehaviour
 
     private void Start()
     {
-        var mainCharTrans = GameObject.Find("mainCharacter").transform;
-        _paintingScr = mainCharTrans.GetComponent<Painting>();
-        _charAnimScr = mainCharTrans.GetComponentInChildren<CharacterAnimation>();
-        _charScr = mainCharTrans.GetComponent<Character>();
-        confettiParticleSys = transform.Find("Particles").Find("Confetti").GetComponent<ParticleSystem>();
-        _cameraMovementScr = GameObject.Find("CameraPosition").GetComponent<CameraMovement>();
+        _paintingScr = FindObjectOfType<Painting>();
+        _charAnimScr = _paintingScr.GetComponentInChildren<CharacterAnimation>();
+        _charScr = _paintingScr.GetComponent<Character>();
+        _cameraMovementScr = FindObjectOfType<CameraMovement>();
 
         _rainParticleGo = GameObject.Find("RainParticle");
         _botsParentGo = GameObject.Find("Bots");
